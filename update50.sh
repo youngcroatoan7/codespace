@@ -1,4 +1,4 @@
-#!/bin/bash
+o#!/bin/bash
 
 # Function to check if /workspaces disk usage is over 85%
 check_disk_usage() {
@@ -33,10 +33,10 @@ if [ "$1" == "-t" ]; then
         echo "Could not update codespace with tag $tag. Try again later."
         exit 1
     fi
-    
+
     # Trigger rebuild
     if command -v gh &> /dev/null; then
-        
+
         # Use gh cli to rebuild if available
         echo "Rebuilding codespace"
         echo -e "\033[31mYour codespace is now being rebuilt, please keep the browser window open and wait for it to reload.\nDo not perform any actions until the rebuild is complete.\033[0m"
@@ -44,7 +44,7 @@ if [ "$1" == "-t" ]; then
             echo -n "."
             sleep 0.2
         done
-        
+
         # Check if force flag is present or disk usage is over 85% for full rebuild
         if [ "$3" == "-f" ] || [ "$3" == "--force" ] || check_disk_usage; then
             gh cs rebuild --codespace $CODESPACE_NAME --full
@@ -92,7 +92,7 @@ if [ "$remote" != "$local" ] || [ "$tag" != "$issue" ] || [ "$1" == "-f" ] || [ 
 
     # Trigger rebuild
     if command -v gh &> /dev/null; then
-        
+
         # Use gh cli to rebuild if available
         echo "Rebuilding codespace"
         echo -e "\033[31mYour codespace is now being rebuilt, please keep the browser window open and wait for it to reload.\nDo not perform any actions until the rebuild is complete.\033[0m"
@@ -101,7 +101,7 @@ if [ "$remote" != "$local" ] || [ "$tag" != "$issue" ] || [ "$1" == "-f" ] || [ 
             echo -n "."
             sleep 0.2
         done
-        
+
         # Check if force flag is present or disk usage is over 85% for full rebuild
         if [ "$1" == "-f" ] || [ "$1" == "--force" ] || check_disk_usage; then
             gh cs rebuild --codespace $CODESPACE_NAME --full
@@ -109,7 +109,7 @@ if [ "$remote" != "$local" ] || [ "$tag" != "$issue" ] || [ "$1" == "-f" ] || [ 
             gh cs rebuild --codespace $CODESPACE_NAME
         fi
     else
-    
+
         # Fall back to command50
         command50 github.codespaces.rebuildEnvironment
     fi
